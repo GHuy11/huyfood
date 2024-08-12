@@ -20,6 +20,38 @@ router.get('/thucan',function (req,res) {
     else res.json(data)
   })
 })
+//lấy thức ăn cơm
+router.get('/thucan/com',function (req,res) {
+  let sql =`SELECT * FROM mon WHERE id_loai = 1 AND id_loaimon=1 ORDER BY ngayDang DESC`
+  db.query(sql , function (err,data) {
+    if (err) res.json({"thông báo":`lỗi ${err}`})
+    else res.json(data)
+  })
+})
+//lấy thức ăn bún
+router.get('/thucan/bun',function (req,res) {
+  let sql =`SELECT * FROM mon WHERE id_loai = 1 AND id_loaimon=2 ORDER BY ngayDang DESC`
+  db.query(sql , function (err,data) {
+    if (err) res.json({"thông báo":`lỗi ${err}`})
+    else res.json(data)
+  })
+})
+//lấy Thức ăn phổ biến
+router.get('/thucan/hot',function (req,res) {
+  let sql = `SELECT * FROM mon WHERE id_loai=1 AND hot=1 ORDER BY ngayDang DESC LIMIT 4`;
+  db.query(sql , function (err,data) {
+    if (err) res.json({"thông báo":`lỗi ${err}`})
+    else res.json(data)
+  })
+})
+//lấy Thức uống phổ biến
+router.get('/thucuong/hot',function (req,res) {
+  let sql = `SELECT * FROM mon WHERE id_loai=2 AND hot=1 ORDER BY ngayDang DESC LIMIT 4`;
+  db.query(sql , function (err,data) {
+    if (err) res.json({"thông báo":`lỗi ${err}`})
+    else res.json(data)
+  })
+})
 //lấy thức uống
 router.get('/thucuong',function (req,res) {
   let sql =`SELECT * FROM mon WHERE id_loai=2`
